@@ -27,9 +27,13 @@ def follow_the_link(url):
         print("Movie")
         
         try:
-            all_p_tags = soup.find('p', {'style':'color:#008080'})
-            print(all_p_tags.findAllNext())
+            p_tag = soup.find('p', {'style':'color:#008080'})
+            
+            p_tag_spans = p_tag.findNextSiblings('span')
+            
+            for a in p_tag_spans:
+                print(a.find('a').text, a.find('a').attrs['href'])
+            
         except:
             print("Last url where error occured(movie)", url)
     
-# follow_the_link('https://blogmflix.xyz/archives/25312')
